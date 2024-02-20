@@ -5,3 +5,5 @@ All the code is within the python notebook. You'll find three main blocks:
 1. the functions
 2. an example for one horse
 3. the code used to draw image for every horses
+
+If you have any comments or question, please ask me: antoine_messager@yahoo.fr or natacha: catz.natacha@gmail.com
