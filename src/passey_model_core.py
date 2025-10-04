@@ -1,6 +1,5 @@
 import numpy as np
 from scipy.interpolate import CubicSpline
-import matplotlib.pyplot as plt
 from tqdm.auto import tqdm
 from numpy.typing import NDArray
 
@@ -556,57 +555,3 @@ def run_passey_inverse_model(
         print("Inverse modeling complete.")
         
     return estimated_ratio_matrix
-
-def plot_inverse_model_results(
-    segment_lengths: NDArray[np.float64],
-    measurements: NDArray[np.float64],
-    estimated_matrix: NDArray[np.float64],
-    title_label: str,
-    distance_scale_factor: float = 10.0
-) -> None:
-    """
-    Creates a plot comparing original measurements with the inverse model results.
-
-    This function displays:
-    1. The original measurements as scatter points.
-    2. The mean estimated signal from the model as a line.
-    3. The standard deviation of the model's estimates as a shaded uncertainty band.
-
-    Args:
-        segment_lengths: The length of each segment in the profile.
-        measurements: The original measured values (e.g., temperature).
-        estimated_matrix: The output matrix from the inverse model (num_trials x num_samples).
-        title_label: A label to include in the plot's title (e.g., the sample name).
-        distance_scale_factor: The factor to divide the cumulative length by for the x-axis unit.
-    """
-    # --- 1. Prepare data for plotting ---
-    # Calculate the x-axis (distance) by taking the cumulative sum of segment lengths.
-    x_distance = np.cumsum(segment_lengths) / distance_scale_factor
-    
-    # Calculate the mean and standard deviation of the model's predictions across all trials.
-    mean_signal = np.mean(estimated_matrix, axis=0)
-    std_signal = np.std(estimated_matrix, axis=0)
-    
-    # --- 2. Create the plot ---
-    # Plot the original measurements as points.
-    plt.plot(x_distance, measurements, 'o', label='Observations')
-    
-    # Plot the mean estimated signal as a line. We capture the plot object to reuse its color.
-    line_plot = plt.plot(x_distance, mean_signal, label='Estimated Signal Source')
-    
-    # Add a shaded region for the uncertainty (±1 standard deviation).
-    plt.fill_between(
-        x_distance,
-        mean_signal - std_signal,
-        mean_signal + std_signal,
-        color=line_plot[0].get_color(), # Match the line color
-        alpha=0.2 # Make the shaded region semi-transparent
-    )
-    
-    # --- 3. Add labels and finalize the plot ---
-    plt.legend()
-    plt.title(f'Inverse Model Results for {title_label}')
-    plt.ylabel('Temperature (°C)')
-    plt.xlabel(f'Distance from Enamel Junction (mm)')
-    
-    return
