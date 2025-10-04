@@ -22,7 +22,8 @@ The project is organized as follows:
 │   └── results/            # Directory where PDF plots are saved
 ├── src/
 │   ├── passey_model_core.py    # Core functions of the inverse model
-│   └── curve_fitting_tools.py  # Tools for curve fitting and visualization
+│   └── curve_fitting_tools.py  # Tools for curve fitting 
+│   └── plotting_tools.py  # Tools visualization
 ├── demo.ipynb              # Jupyter notebook for demonstration and analysis
 ├── requirements.txt        # List of Python dependencies
 └── README.md               # This file
