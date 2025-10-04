@@ -34,8 +34,8 @@ Follow these steps to set up your environment and run the project.
 
 **1. Clone the Repository**
 ```bash
-git clone <URL_of_your_repository>
-cd <project_folder_name>
+git clone https://github.com/antoinemessager/isotope_temperature
+cd isotope_temperature
 ```
 
 **2. Create a Virtual Environment**
